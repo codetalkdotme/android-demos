@@ -17,16 +17,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".SFirstActivity" />
-        <activity
-            android:name=".StoFirstActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".StaFirstActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".StoFirstActivity" android:launchMode="singleTop" />
+        <activity android:name=".StaFirstActivity" android:launchMode="singleTask" />
+        <activity android:name=".SiSecondActivity" android:launchMode="singleInstance"></activity>
         <activity android:name=".SiFirstActivity" />
         <activity android:name=".StoSecondActivity" />
         <activity android:name=".StaSecondActivity" />
-        <activity android:name=".SiSecondActivity" android:launchMode="singleInstance"></activity>
     </application>
 
 </manifest>
