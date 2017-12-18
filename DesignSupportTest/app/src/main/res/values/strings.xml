@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DesignSupportTest</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tab_title_userinfo">User</string>
+    <string name="tab_title_post">Post</string>
+    <string name="tab_title_tutorial">Tutorial</string>
+</resources>
