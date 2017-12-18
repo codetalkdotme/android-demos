@@ -1,12 +1,15 @@
 package me.codetalk.androidthreadtest1.service;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -76,10 +79,36 @@ public class DownloadService extends Service {
     }
 
     private Notification getNotification(String title, int progress) {
+
+        //
+        String channel = "notif_channel_01";
+        // The user-visible name of the channel.
+        // The user-visible description of the channel.
+//        String description = getString(R.string.channel_description);
+        NotificationChannel mChannel = null;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mChannel = new NotificationChannel(channel, channel,NotificationManager.IMPORTANCE_LOW);
+            getNotificationManager().createNotificationChannel(mChannel);
+        }
+
+        // Configure the notification channel.
+//        mChannel.setDescription(description);
+//        mChannel.enableLights(true);
+        // Sets the notification light color for notifications posted to this
+        // channel, if the device supports this feature.
+//        mChannel.setLightColor(Color.RED);
+//        mChannel.enableVibration(true);
+//        mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        NotificationCompat.Builder builder = null;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder = new NotificationCompat.Builder(this, channel);
+        } else {
+            builder = new NotificationCompat.Builder(this);
+        }
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         builder.setContentIntent(pi);
@@ -88,6 +117,8 @@ public class DownloadService extends Service {
             builder.setContentText(progress + "%");
             builder.setProgress(100, progress, false);
         }
+
+
 
         return builder.build();
     }
