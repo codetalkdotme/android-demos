@@ -21,6 +21,10 @@
         android:layout_height="wrap_content"
         android:text="Tab Layout"/>
 
-
+    <Button
+        android:id="@+id/btn_snackbar_act"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Snack Bar"/>
 
 </LinearLayout>

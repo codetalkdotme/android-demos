@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btnTabLayout = findViewById(R.id.btn_tablayout);
         btnTabLayout.setOnClickListener(this);
 
+        Button btnSnackbar = findViewById(R.id.btn_snackbar_act);
+        btnSnackbar.setOnClickListener(this);
+
     }
 
     @Override
@@ -39,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_tablayout:
                 Intent tabIntent = new Intent(this, TabLayoutActivity.class);
                 startActivity(tabIntent);
+                break;
+            case R.id.btn_snackbar_act:
+                Intent snackIntent = new Intent(this, SnackbarActivity.class);
+                startActivity(snackIntent);
                 break;
         }
     }
