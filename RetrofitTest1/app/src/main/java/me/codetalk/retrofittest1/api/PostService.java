@@ -1,5 +1,6 @@
 package me.codetalk.retrofittest1.api;
 
+import io.reactivex.Observable;
 import me.codetalk.retrofittest1.api.entity.PostParam;
 import me.codetalk.retrofittest1.api.response.PostListResponse;
 import me.codetalk.retrofittest1.api.response.BaseResponse;
@@ -17,12 +18,12 @@ import retrofit2.http.Query;
 public interface PostService {
 
     @POST("/post/create")
-    Call<BaseResponse> createPost(@Body PostParam post);
+    Observable<BaseResponse> createPost(@Body PostParam post);
 
     @GET("/post/list")
-    Call<PostListResponse> listPost(@Query("begin") Integer begin, @Query("count") Integer count);
+    Observable<PostListResponse> listPost(@Query("begin") Integer begin, @Query("count") Integer count);
 
     @GET("/tag/listall")
-    Call<TagDataResponse> listAllTags();
+    Observable<TagDataResponse> listAllTags();
 
 }

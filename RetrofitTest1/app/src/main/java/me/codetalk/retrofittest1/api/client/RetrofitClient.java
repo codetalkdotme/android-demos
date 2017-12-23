@@ -1,6 +1,7 @@
 package me.codetalk.retrofittest1.api.client;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 /**
@@ -15,6 +16,7 @@ public final class RetrofitClient {
         if(client == null) {
             client = new Retrofit.Builder()
                     .baseUrl(baseUrl)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(JacksonConverterFactory.create())
                     .build();
         }

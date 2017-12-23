@@ -11,8 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.codetalk.retrofittest1.adapter.PostAdapter;
 import me.codetalk.retrofittest1.api.ApiUtils;
 import me.codetalk.retrofittest1.api.PostService;
@@ -69,23 +74,31 @@ public class MainActivity extends AppCompatActivity {
     private void loadPosts() {
         Log.i(TAG, "Prepare to call postService.listPost...");
 
-        postService.listPost(page * count, count).enqueue(new Callback<PostListResponse>() {
-            @Override
-            public void onResponse(Call<PostListResponse> call, Response<PostListResponse> response) {
-                if(response.isSuccessful()) {
-                    postAdapter.updatePosts(response.body().getPostList());
-                } else {
-                    int statusCode  = response.code();
-                    Toast.makeText(MainActivity.this, "Load posts failed! Status code = " + statusCode, Toast.LENGTH_SHORT).show();
-                }
-            }
+        postService.listPost(page * count, count).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(postListResp -> {
+                    postAdapter.updatePosts(postListResp.getPostList());
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Load posts failed!", Toast.LENGTH_SHORT).show();
+                });
 
-            @Override
-            public void onFailure(Call<PostListResponse> call, Throwable t) {
-                t.printStackTrace();
-                Toast.makeText(MainActivity.this, "Load posts failed!", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        postService.listPost(page * count, count).enqueue(new Callback<PostListResponse>() {
+//            @Override
+//            public void onResponse(Call<PostListResponse> call, Response<PostListResponse> response) {
+//                if(response.isSuccessful()) {
+//                    postAdapter.updatePosts(response.body().getPostList());
+//                } else {
+//                    int statusCode  = response.code();
+//                    Toast.makeText(MainActivity.this, "Load posts failed! Status code = " + statusCode, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<PostListResponse> call, Throwable t) {
+//                t.printStackTrace();
+//                Toast.makeText(MainActivity.this, "Load posts failed!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override

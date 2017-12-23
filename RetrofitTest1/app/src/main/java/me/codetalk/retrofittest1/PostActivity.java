@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.codetalk.retrofittest1.adapter.TagAdapter;
 import me.codetalk.retrofittest1.api.ApiUtils;
 import me.codetalk.retrofittest1.api.PostService;
@@ -61,7 +63,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int viewId = view.getId();
         if(viewId == R.id.btn_create_post) {
-            PostService postSerivce = ApiUtils.getPostService();
+            PostService postService = ApiUtils.getPostService();
 
             PostParam newPost = new PostParam();
             newPost.setId(rand.nextInt(10000) + 100L);
@@ -71,46 +73,63 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
             newPost.setTags(tagAdapter.getSelectedTags());
 
-            postSerivce.createPost(newPost).enqueue(new Callback<BaseResponse>() {
-                @Override
-                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                    if(response.isSuccessful()) {
-                        BaseResponse rt = response.body();
+            postService.createPost(newPost).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(rt -> {
                         if(rt.getRetCode() == 1) {// return to post list
                             setResult(RESULT_OK);
                             finish();
                         } else {
                             Toast.makeText(PostActivity.this, rt.getRetMsg(), Toast.LENGTH_SHORT).show();
                         }
-                    } else {
+                    }, throwable -> {
                         Toast.makeText(PostActivity.this, "Error create post!", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                    });
 
-                @Override
-                public void onFailure(Call<BaseResponse> call, Throwable t) {
-                    Toast.makeText(PostActivity.this, "Error create post!", Toast.LENGTH_SHORT).show();
-                }
-            });
+
+//            postService.createPost(newPost).enqueue(new Callback<BaseResponse>() {
+//                @Override
+//                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+//                    if(response.isSuccessful()) {
+//                        BaseResponse rt = response.body();
+//                        if(rt.getRetCode() == 1) {// return to post list
+//                            setResult(RESULT_OK);
+//                            finish();
+//                        } else {
+//                            Toast.makeText(PostActivity.this, rt.getRetMsg(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(PostActivity.this, "Error create post!", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<BaseResponse> call, Throwable t) {
+//                    Toast.makeText(PostActivity.this, "Error create post!", Toast.LENGTH_SHORT).show();
+//                }
+//            });
         }
     }
 
     private void loadTags() {
         PostService postService = ApiUtils.getPostService();
-        postService.listAllTags().enqueue(new Callback<TagDataResponse>() {
-            @Override
-            public void onResponse(Call<TagDataResponse> call, Response<TagDataResponse> response) {
-                if(response.isSuccessful()) {
-                    List<Tag> tagList = response.body().getTagList();
-                    tagAdapter.updateTags(tagList);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TagDataResponse> call, Throwable t) {
-
-            }
-        });
+        postService.listAllTags().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(resp -> {
+                    tagAdapter.updateTags(resp.getTagList());
+                });
+//        postService.listAllTags().enqueue(new Callback<TagDataResponse>() {
+//            @Override
+//            public void onResponse(Call<TagDataResponse> call, Response<TagDataResponse> response) {
+//                if(response.isSuccessful()) {
+//                    List<Tag> tagList = response.body().getTagList();
+//                    tagAdapter.updateTags(tagList);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<TagDataResponse> call, Throwable t) {
+//
+//            }
+//        });
     }
 
 }
