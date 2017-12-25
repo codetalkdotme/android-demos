@@ -1,5 +1,6 @@
 package me.codetalk.coordinatorbehaviortest;
 
+import android.graphics.Bitmap;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,8 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
@@ -36,6 +42,18 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         mToolbar.inflateMenu(R.menu.menu_main);
         startAlphaAnimation(mTitle, 0, View.INVISIBLE);
+
+        // load profile image
+        CircleImageView profieImg = findViewById(R.id.image_profile);
+//        Glide.with(this)
+//                .load("http://codetalk.me/quila.png")
+//                .apply(new RequestOptions().dontAnimate().placeholder(R.mipmap.ic_launcher))
+//                .into(profieImg);
+        Glide.with(this)
+                .load("http://codetalk.me/quila.png")
+                .placeholder(R.mipmap.ic_launcher)
+                .dontAnimate()
+                .into(profieImg);
     }
 
     private void bindActivity() {

@@ -131,10 +131,11 @@
     </android.support.v7.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_profile"
         android:layout_width="@dimen/image_width"
         android:layout_height="@dimen/image_width"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/quila"
+        android:src="@drawable/sea"
         app:border_color="@android:color/white"
         app:border_width="2dp"
         app:finalHeight="@dimen/image_final_width"
