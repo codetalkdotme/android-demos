@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.codetalk.validatetest.MainActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/input_email"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input your email..."
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="32dp"/>
+
+    <EditText
+        android:id="@+id/input_passwd"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your password..."
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/input_passwd_confirm"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm your password..."
+        android:layout_marginBottom="12dp"/>
+
+    <CheckBox
+        android:id="@+id/chk_agree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agree it"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/btn_validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Validate!"
+        android:padding="12dp"/>
+
+</LinearLayout>

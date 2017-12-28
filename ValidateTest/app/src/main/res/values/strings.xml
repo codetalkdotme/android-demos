@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ValidateTest</string>
+    <string name="agree_must">You must agree before signup!</string>
+    <string name="passwd_requirement">Password must contain uppercase / symbol etc.</string>
+</resources>
