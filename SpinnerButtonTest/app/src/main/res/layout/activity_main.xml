@@ -38,4 +38,17 @@
         android:text="Test"
         android:layout_margin="12dp"/>
 
+    <me.codetalk.spinnerbuttontest.custom.SpinnerButton
+        android:id="@+id/spinner_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"/>
+
+    <Button
+        android:id="@+id/btn_test2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test2"
+        android:layout_margin="12dp"/>
+
 </LinearLayout>

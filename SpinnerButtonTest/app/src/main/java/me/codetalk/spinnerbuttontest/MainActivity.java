@@ -6,12 +6,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import me.codetalk.spinnerbuttontest.custom.SpinnerButton;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn;
     private String btnText;
     private Button btnTest;
+    private Button btnTest2;
     private ProgressBar btnLoading;
+
+    private SpinnerButton spinnerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +30,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnTest = findViewById(R.id.btn_test);
         btnTest.setOnClickListener(this);
+
+        btnTest2 = findViewById(R.id.btn_test2);
+        btnTest2.setOnClickListener(this);
+
+        spinnerButton = findViewById(R.id.spinner_btn);
     }
 
     @Override
     public void onClick(View view) {
-        if(btn.isEnabled()) {
-            btn.setEnabled(false);
-            btn.setText("");
-            btnLoading.setVisibility(View.VISIBLE);
-        } else {
-            btn.setEnabled(true);
-            btn.setText(btnText);
-            btnLoading.setVisibility(View.GONE);
+        int viewId = view.getId();
+        if(viewId == R.id.btn_test) {
+            if(btn.isEnabled()) {
+                btn.setEnabled(false);
+                btn.setText("");
+                btnLoading.setVisibility(View.VISIBLE);
+            } else {
+                btn.setEnabled(true);
+                btn.setText(btnText);
+                btnLoading.setVisibility(View.GONE);
+            }
+        } else if(viewId == R.id.btn_test2) {
+            if(spinnerButton.isEnabled()) {
+                spinnerButton.setEnabled(false);
+            } else {
+                spinnerButton.setEnabled(true);
+            }
         }
     }
 }
