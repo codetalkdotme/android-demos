@@ -11,6 +11,7 @@ import me.codetalk.activityfeaturetest.activity.Activity2;
 import me.codetalk.activityfeaturetest.activity.Activity3;
 import me.codetalk.activityfeaturetest.activity.Activity4;
 import me.codetalk.activityfeaturetest.activity.Activity5;
+import me.codetalk.activityfeaturetest.activity.Activity6;
 import me.codetalk.activityfeaturetest.activity.NormalActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn3).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
         findViewById(R.id.btn5).setOnClickListener(this);
+        findViewById(R.id.btn6).setOnClickListener(this);
     }
 
     @Override
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn5:
                 target = Activity5.class;
+                break;
+            case R.id.btn6:
+                target = Activity6.class;
                 break;
         }
 
