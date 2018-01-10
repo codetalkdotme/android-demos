@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.codetalk.imagespinnerbutton.MainActivity">
+
+    <me.codetalk.imagespinnerbutton.ImageSpinnerButton
+        android:id="@+id/btn_img"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/sel_action_done_36dp"
+        android:background="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"/>
+
+</LinearLayout>
